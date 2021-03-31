@@ -2,7 +2,7 @@
 
 **fetch s**omething with types
 
-#### Normal [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+#### Simplified [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ```typescript
 import { fetchS } from "https://deno.land/x/fetchs/mod.ts"

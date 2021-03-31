@@ -1,14 +1,5 @@
 import type { BodyMethod, FetchS } from "./types.ts";
-
-export class FetchSError extends Error {
-  constructor(
-    message: string,
-    readonly status: number,
-    readonly statusText: string,
-  ) {
-    super(message);
-  }
-}
+import { FetchSError } from "./error.ts";
 
 export const fetchS: FetchS = async (
   url: string,
@@ -24,7 +15,6 @@ export const fetchS: FetchS = async (
   }
   const contentType = res.headers.get("content-type");
   const contentLength = res.headers.get("content-length");
-  if (res.status === 204 || contentLength === "0") return undefined;
   switch (init?.bodyMethod) {
     case "arrayBuffer":
       return await res.arrayBuffer();
@@ -33,10 +23,14 @@ export const fetchS: FetchS = async (
       return await res.blob();
       break;
     case "formData":
-      return await res.formData();
+      return await res.formData().catch((err) => {
+        throw new FetchSError(err.message, res.status, res.statusText);
+      });
       break;
     case "json":
-      return await res.json();
+      return await res.json().catch((err) => {
+        throw new FetchSError(err.message, res.status, res.statusText);
+      });
       break;
     case "text":
       return await res.text();
