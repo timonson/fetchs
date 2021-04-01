@@ -11,8 +11,6 @@ const fetchS1 = async (url, init)=>{
     if (!res.ok) {
         throw new FetchSError(`${res.status} '${res.statusText}' received instead of 200-299 range`, res.status, res.statusText);
     }
-    const contentType = res.headers.get("content-type");
-    const contentLength = res.headers.get("content-length");
     switch(init?.bodyMethod){
         case "arrayBuffer":
             return await res.arrayBuffer();

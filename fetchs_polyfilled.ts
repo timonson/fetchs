@@ -15,8 +15,6 @@ export const fetchS: FetchS = async (
       res.statusText,
     );
   }
-  const contentType = res.headers.get("content-type");
-  const contentLength = res.headers.get("content-length");
   switch (init?.bodyMethod) {
     case "arrayBuffer":
       return await res.arrayBuffer();
