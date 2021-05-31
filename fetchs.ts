@@ -5,7 +5,7 @@ import type { BodyMethod, FetchS } from "./types.ts";
 export const fetchS: FetchS = async (
   input: string | Request | URL,
   init?: RequestInit & { bodyMethod?: BodyMethod },
-): Promise<any> => {
+) => {
   const res = await fetch(input, init).catch((err) => {
     throw new FetchSError(err.message, 0, "Network Error");
   });
