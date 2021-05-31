@@ -1,11 +1,15 @@
-import { lookup } from "https://deno.land/x/media_types@v2.7.1/mod.ts";
+import { iter, lookup } from "./deps.ts";
 
 export async function fetch(
-  input: string | Request,
+  input: string | Request | URL,
   init?: RequestInit,
 ): Promise<Response> {
   try {
-    const url = typeof input === "string" ? new URL(input) : new URL(input.url);
+    const url = typeof input === "string"
+      ? new URL(input)
+      : input instanceof Request
+      ? new URL(input.url)
+      : input;
     if (url.protocol === "file:") {
       // Only allow GET requests
       if (init && init.method && init.method !== "GET") {
@@ -36,8 +40,8 @@ export async function fetch(
       const file = await Deno.open(url, { read: true });
       const body = new ReadableStream<Uint8Array>({
         start: async (controller) => {
-          for await (const chunk of Deno.iter(file)) {
-            controller.enqueue(chunk);
+          for await (const chunk of iter(file)) {
+            controller.enqueue(chunk.slice(0));
           }
           file.close();
           controller.close();
@@ -46,9 +50,17 @@ export async function fetch(
           file.close();
         },
       });
-      return new Response(body, { status: 200, headers });
+      const response = new Response(body, { status: 200, headers });
+      Object.defineProperty(response, "url", {
+        get() {
+          return url;
+        },
+        configurable: true,
+        enumerable: true,
+      });
+      return response;
     }
-    return window.fetch(input, init);
+    return globalThis.fetch(input, init);
   } catch (err) {
     if (err instanceof Deno.errors.NotFound) {
       return new Response(null, { status: 404 });
