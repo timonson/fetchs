@@ -4,10 +4,10 @@ import { FetchSError } from "./error.ts";
 import type { BodyMethod, FetchS } from "./types.ts";
 
 export const fetchS: FetchS = async (
-  url: string,
+  input: string | Request | URL,
   init?: RequestInit & { bodyMethod?: BodyMethod },
 ): Promise<any> => {
-  const res = await fetchPolyfilled(url, init).catch((err) => {
+  const res = await fetchPolyfilled(input, init).catch((err) => {
     throw new FetchSError(err.message, 0, "Network Error");
   });
   if (!res.ok) {

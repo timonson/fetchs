@@ -1,4 +1,4 @@
-import { fetchPolyfill } from "../mod.ts";
+import { fetchPolyfill, fetchSPolyfill } from "../mod.ts";
 import { assertEquals } from "https://deno.land/std@0.97.0/testing/asserts.ts";
 import { toFileUrl } from "https://deno.land/std@0.97.0/path/mod.ts";
 
@@ -35,4 +35,13 @@ Deno.test("fetchPolyfill 1MB file", async () => {
   const file = await response.blob();
 
   assertEquals(size, file.size);
+});
+
+Deno.test("fetchSPolyfill lorem", async function () {
+  assertEquals(
+    await fetchSPolyfill(new URL("./fixtures/lorem.txt", import.meta.url), {
+      bodyMethod: "text",
+    }),
+    await Deno.readTextFile(new URL("./fixtures/lorem.txt", import.meta.url)),
+  );
 });
