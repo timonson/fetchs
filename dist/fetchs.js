@@ -23,19 +23,14 @@ const fetchS1 = async (input, init) => {
     switch (init?.bodyMethod) {
       case "arrayBuffer":
         return await res.arrayBuffer();
-        break;
       case "blob":
         return await res.blob();
-        break;
       case "formData":
         return await res.formData();
-        break;
       case "json":
         return await res.json();
-        break;
       case "text":
         return await res.text();
-        break;
       case "uint8Array":
       default:
         return new Uint8Array(await res.arrayBuffer());
