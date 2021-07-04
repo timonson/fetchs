@@ -1,6 +1,6 @@
 import { fetchPolyfill, fetchSPolyfill } from "../mod.ts";
-import { assertEquals } from "https://deno.land/std@0.97.0/testing/asserts.ts";
-import { toFileUrl } from "https://deno.land/std@0.97.0/path/mod.ts";
+import { assertEquals } from "https://deno.land/std@0.99.0/testing/asserts.ts";
+import { toFileUrl } from "https://deno.land/std@0.99.0/path/mod.ts";
 
 Deno.test("fetchPolyfill local file URL", async () => {
   const req = await fetchPolyfill(
