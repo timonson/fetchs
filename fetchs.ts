@@ -9,6 +9,13 @@ export const fetchS: FetchS = async (
   const res = await fetch(input, init).catch((err) => {
     throw new FetchSError(err.message, 0, "Network Error");
   });
+  return await processResponse(res, init);
+};
+
+export async function processResponse(
+  res: Response,
+  init?: RequestInit & { bodyMethod?: BodyMethod },
+) {
   if (!res.ok) {
     throw new FetchSError(
       `Received status code ${res.status} instead of 200-299 range`,
@@ -36,4 +43,4 @@ export const fetchS: FetchS = async (
   } catch (err) {
     throw new FetchSError(err.message, res.status, res.statusText);
   }
-};
+}
