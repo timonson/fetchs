@@ -34,6 +34,10 @@ export type FetchS<R = void> = {
   ): R;
   <R extends Promise<unknown> = Promise<Uint8Array>>(
     input: string | Request | URL,
-    init?: RequestInit & { bodyMethod?: "uint8Array" },
+    init: RequestInit & { bodyMethod: "uint8Array" },
+  ): R;
+  <R extends Promise<unknown> = Promise<ReadableStream>>(
+    input: string | Request | URL,
+    init?: RequestInit,
   ): R;
 };

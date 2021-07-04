@@ -30,8 +30,9 @@ export const fetchS: FetchS = async (
       case "text":
         return await res.text();
       case "uint8Array":
-      default:
         return new Uint8Array(await res.arrayBuffer());
+      default:
+        return res.body;
     }
   } catch (err) {
     throw new FetchSError(err.message, res.status, res.statusText);

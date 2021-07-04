@@ -45,3 +45,13 @@ Deno.test("fetchSPolyfill lorem", async function () {
     await Deno.readTextFile(new URL("./fixtures/lorem.txt", import.meta.url)),
   );
 });
+
+Deno.test("fetchSPolyfill no bodyMethod", async function () {
+  assertEquals(
+    await fetchSPolyfill(
+      new URL("./fixtures/lorem.txt", import.meta.url),
+    ) instanceof
+      ReadableStream,
+    true,
+  );
+});
