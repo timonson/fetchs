@@ -1,8 +1,8 @@
 import { iter, lookup } from "./deps.ts";
 
 /**
-  * Adapted from https://github.com/lucacasonato/deno_local_file_fetch
-  */
+ * Adapted from https://github.com/lucacasonato/deno_local_file_fetch
+ */
 
 export async function fetch(
   input: string | Request | URL,
