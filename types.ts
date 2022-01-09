@@ -1,7 +1,7 @@
 type JsonPrimitive = string | number | boolean | null;
 type JsonObject = { [member: string]: JsonValue };
 type JsonArray = JsonValue[];
-export type JsonValue = JsonPrimitive | JsonObject | JsonArray;
+type JsonValue = JsonPrimitive | JsonObject | JsonArray;
 
 export type BodyMethod =
   | "arrayBuffer"
@@ -24,7 +24,7 @@ export type FetchS<R = void> = {
     input: string | Request | URL,
     init: RequestInit & { bodyMethod: "formData" },
   ): R;
-  <R extends Promise<unknown> = Promise<string>>(
+  <R extends Promise<unknown> = Promise<JsonValue>>(
     input: string | Request | URL,
     init: RequestInit & { bodyMethod: "json" },
   ): R;
