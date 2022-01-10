@@ -1,4 +1,7 @@
-import { fetchPolyfill, fetchSPolyfill } from "../mod.ts";
+import {
+  fetch as fetchPolyfill,
+  fetchS as fetchSPolyfill,
+} from "../polyfill.ts";
 import { assertEquals } from "https://deno.land/std@0.120.0/testing/asserts.ts";
 import { toFileUrl } from "https://deno.land/std@0.120.0/path/mod.ts";
 

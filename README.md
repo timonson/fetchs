@@ -2,7 +2,7 @@
 
 **fetch s**omething with types
 
-#### Simplified [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+### Simplified [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
 
 ```typescript
 import { fetchS } from "https://deno.land/x/fetchs/mod.ts";
@@ -10,7 +10,7 @@ import { fetchS } from "https://deno.land/x/fetchs/mod.ts";
 await fetchS("https://github.com", { bodyMethod: "text" });
 ```
 
-#### _Fetch polyfill_ for [deno](https://github.com/denoland/deno) to fetch files, as well
+### Polyfill to fetch files with [deno](https://github.com/denoland/deno)
 
 ```typescript
 import { fetchSPolyfill } from "https://deno.land/x/fetchs/mod.ts";

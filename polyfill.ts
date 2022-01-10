@@ -1,4 +1,8 @@
 import { iter, lookup } from "./deps.ts";
+import { handleResponse } from "./handler.ts";
+import { FetchSError } from "./error.ts";
+
+import type { BodyMethod, FetchS } from "./types.ts";
 
 /**
  * Adapted from https://github.com/lucacasonato/deno_local_file_fetch
@@ -73,3 +77,13 @@ export async function fetch(
     }
   }
 }
+
+export const fetchS: FetchS = async (
+  input: string | Request | URL,
+  init?: RequestInit & { bodyMethod?: BodyMethod },
+) => {
+  const res = await fetch(input, init).catch((err) => {
+    throw new FetchSError(err.message, 0, "Network Error");
+  });
+  return await handleResponse(res, init);
+};

@@ -1,6 +1,5 @@
-export { fetch as fetchPolyfill } from "./polyfill.ts";
 export { fetchS } from "./fetchs.ts";
-export { fetchS as fetchSPolyfill } from "./fetchs_polyfilled.ts";
+export { fetchS as fetchSPolyfill } from "./polyfill.ts";
 
 export type {
   BodyMethod,
