@@ -1,4 +1,4 @@
-export { fetch as fetchPolyfill } from "./fetch_polyfill.ts";
+export { fetch as fetchPolyfill } from "./polyfill.ts";
 export { fetchS } from "./fetchs.ts";
 export { fetchS as fetchSPolyfill } from "./fetchs_polyfilled.ts";
 

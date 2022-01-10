@@ -1,4 +1,4 @@
-import { fetch as fetchPolyfilled } from "./fetch_polyfill.ts";
+import { fetch as fetchPolyfilled } from "./polyfill.ts";
 import { processResponse } from "./fetchs.ts";
 import { FetchSError } from "./error.ts";
 
